@@ -1,0 +1,36 @@
+umisoft:
+  jwt:
+    secret: umisoft.cn
+    minutes: 30
+  avatar-disk-prefix-path: /Users/hujie/Downloads
+spring:
+  datasource:
+    # https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+    druid:
+      url: jdbc:mysql://192.144.128.53:3306/umi-soft-admin?useUnicode=true&useSSL=false&characterEncoding=utf8
+      username: root
+      password: umisoft.cn
+      driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  redis:
+    database: 0
+    host: 192.144.128.53
+    port: 6379
+    password: umisoft.cn
+mybatis-plus:
+  configuration:
+    # 开启查询结果【下划线转驼峰】
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      # 逻辑已删除值(默认为 1)
+      logic-delete-value: 1
+      # 逻辑未删除值(默认为 0)
+      logic-not-delete-value: 0
+  # 支持统配符 * 或者 ; 分割
+  type-enums-package: cn.umisoft.*.enum
