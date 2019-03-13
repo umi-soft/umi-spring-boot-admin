@@ -1,5 +1,6 @@
 package cn.umisoft.admin.controller;
 
+import cn.umisoft.admin.service.ITRoleService;
 import cn.umisoft.admin.util.UmiUserContextHolder;
 import cn.umisoft.admin.util.property.UmiApplicationProperties;
 import cn.umisoft.admin.entity.TUser;
@@ -40,6 +41,8 @@ public class AuthController {
 
     @Autowired
     protected ITUserService userService;
+    @Autowired
+    protected ITRoleService roleService;
     @Autowired
     protected StringRedisTemplate redisTemplate;
     @Autowired
@@ -98,10 +101,12 @@ public class AuthController {
     @GetMapping(value = "user-authorities")
     public ApiResult userAuthorities(){
         JSONObject result = new JSONObject();
-        result.put("user", null);
-        result.put("authorities", null);
-        UmiJWT.logout(props.getJwt().getSecret(), redisTemplate);
-        return ApiResultWrapper.success("退出登录成功");
+        String id = UmiUserContextHolder.getContext();
+
+        result.put("user", userService.getById(id));
+        result.put("roles", roleService.findAllByCurrentUserId());
+
+        return ApiResultWrapper.success(result);
     }
     @GetMapping(value = "system-authorities")
     public ApiResult systemAuthorities(){

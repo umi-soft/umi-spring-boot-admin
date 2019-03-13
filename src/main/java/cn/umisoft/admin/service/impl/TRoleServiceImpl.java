@@ -4,8 +4,10 @@ import cn.umisoft.admin.entity.TRole;
 import cn.umisoft.admin.mapper.TRoleMapper;
 import cn.umisoft.admin.repository.TRoleRepository;
 import cn.umisoft.admin.service.ITRoleService;
+import cn.umisoft.admin.util.UmiUserContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -18,6 +20,21 @@ import java.util.List;
  */
 @Service
 public class TRoleServiceImpl extends UmiServiceImpl<TRoleMapper, TRoleRepository, TRole> implements ITRoleService {
+    @Override
+    public HashSet<String> findAllByCurrentUserId() {
+        String id = UmiUserContextHolder.getContext();
+        HashSet<String> set = new HashSet<String>();
+        List<String> list = this.baseRepository.findAllFromUserDept(id);
+        set.addAll(list);
+        list = this.baseRepository.findAllFromUserGroup(id);
+        set.addAll(list);
+        list = this.baseRepository.findAllFromUserRole(id);
+        set.addAll(list);
+        list = this.baseRepository.findAllFromUserRoleGroup(id);
+        set.addAll(list);
+        return set;
+    }
+
     @Override
     public List<TRole> findAllByDeptId(String deptId) {
         return this.baseRepository.findAllByDeptId(deptId);

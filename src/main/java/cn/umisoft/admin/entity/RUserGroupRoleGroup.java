@@ -23,9 +23,9 @@ import javax.persistence.Table;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("R_USER_ROLE_GROUP")
+@TableName("R_USER_GROUP_ROLE_GROUP")
 @Entity
-@Table(name = "R_USER_ROLE_GROUP")
+@Table(name = "R_USER_GROUP_ROLE_GROUP")
 @Where(clause = "deleted = 0")
 public class RUserGroupRoleGroup extends UmiEntity implements Serializable {
 
