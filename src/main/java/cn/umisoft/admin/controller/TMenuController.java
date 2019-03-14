@@ -8,12 +8,10 @@ import cn.umisoft.admin.service.ITSecurityService;
 import cn.umisoft.admin.util.ApiResult;
 import cn.umisoft.admin.util.ApiResultWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -33,8 +31,8 @@ public class TMenuController extends UmiTController<ITMenuService, TMenu> {
     protected ITRoleService roleService;
 
     @PostMapping(value = "sync")
-    public ApiResult sync(HttpServletRequest request) {
-        return ApiResultWrapper.success();
+    public ApiResult sync(HttpServletRequest request, @RequestBody List<TMenu> menus) {
+        return ApiResultWrapper.success(this.baseService.syncMenus(menus));
     }
 
     @GetMapping(value = "all-securities")

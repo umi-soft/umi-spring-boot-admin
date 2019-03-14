@@ -1,5 +1,6 @@
 package cn.umisoft.admin.controller;
 
+import cn.umisoft.admin.service.ITMenuService;
 import cn.umisoft.admin.service.ITRoleService;
 import cn.umisoft.admin.util.UmiUserContextHolder;
 import cn.umisoft.admin.util.property.UmiApplicationProperties;
@@ -43,6 +44,8 @@ public class AuthController {
     protected ITUserService userService;
     @Autowired
     protected ITRoleService roleService;
+    @Autowired
+    protected ITMenuService menuService;
     @Autowired
     protected StringRedisTemplate redisTemplate;
     @Autowired
@@ -110,8 +113,7 @@ public class AuthController {
     }
     @GetMapping(value = "system-authorities")
     public ApiResult systemAuthorities(){
-        UmiJWT.logout(props.getJwt().getSecret(), redisTemplate);
-        return ApiResultWrapper.success("退出登录成功");
+        return ApiResultWrapper.success(this.menuService.findAllRouterRoles());
     }
     /**
      * @description: <p>退出登录，cn.umisoft.admin.util.interceptor.JWTInterceptor 拦截器必须拦截token，确保分布式环境下，能够正常退出</p>
