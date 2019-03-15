@@ -42,4 +42,10 @@ public interface ITRoleService extends IUmiService<TRole> {
      * @date: 2019/3/7 12:11 AM
      */
     List<TRole> findAllByMenuId(String menuId);
+    /**
+     * @description: <p>根据角色组ID，查询角色组下直接分配的角色信息</p>
+     * @author: hujie@umisoft.cn
+     * @date: 2019/3/14 11:56 PM
+     */
+    List<TRole> findAllByRoleGroupId(String roleGroupId);
 }

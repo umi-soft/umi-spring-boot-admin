@@ -81,5 +81,11 @@ public interface TRoleRepository extends JpaRepository<TRole, String> {
      */
     @Query("from TRole where id in ( select roleId from RMenuRole where menuId = ?1)")
     List<TRole> findAllByMenuId(String menuId);
-
+    /**
+     * @description: <p>根据路由角色组ID，查看该角色组直接分配的所有角色列表</p>
+     * @author: hujie@umisoft.cn
+     * @date: 2019/3/7 12:11 AM
+     */
+    @Query("from TRole where id in ( select roleId from RRoleGroup where groupId = ?1)")
+    List<TRole> findAllByRoleGroupId(String roleGroupId);
 }

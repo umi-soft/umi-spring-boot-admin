@@ -45,16 +45,16 @@ public class TGroupController extends UmiTController<ITGroupService, TGroup> {
 
     @GetMapping(value = "all-role-groups")
     public ApiResult allRoleGroups(HttpServletRequest request, String id) {
-        return ApiResultWrapper.success(this.groupService.findAllRoleGroupByUserId(id));
+        return ApiResultWrapper.success(this.groupService.findAllRoleGroupByUserGroupId(id));
     }
 
     @GetMapping(value = "all-user-groups")
     public ApiResult allUserGroups(HttpServletRequest request, String id) {
-        return ApiResultWrapper.success(this.groupService.findAllUserGroupByUserId(id));
+        return ApiResultWrapper.success(this.groupService.findAllUserGroupByRoleGroupId(id));
     }
 
     @GetMapping(value = "all-roles")
     public ApiResult allRoles(HttpServletRequest request, String id) {
-        return ApiResultWrapper.success(this.roleService.findAllByUserId(id));
+        return ApiResultWrapper.success(this.roleService.findAllByRoleGroupId(id));
     }
 }

@@ -48,4 +48,9 @@ public class TRoleServiceImpl extends UmiServiceImpl<TRoleMapper, TRoleRepositor
     public List<TRole> findAllByMenuId(String menuId) {
         return this.baseRepository.findAllByMenuId(menuId);
     }
+
+    @Override
+    public List<TRole> findAllByRoleGroupId(String roleGroupId) {
+        return this.baseRepository.findAllByRoleGroupId(roleGroupId);
+    }
 }

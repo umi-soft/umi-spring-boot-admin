@@ -5,6 +5,7 @@ import cn.umisoft.admin.mapper.TDeptMapper;
 import cn.umisoft.admin.repository.TDeptRepository;
 import cn.umisoft.admin.service.ITDeptService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class TDeptServiceImpl extends UmiServiceImpl<TDeptMapper, TDeptRepositor
 
     @Override
     public List<TDept> queryTree(String...ids) {
-        if (ids.length == 0 || (ids.length == 1 && (ids[0] == null || ids[0].equals("")))) {
+        if (ids.length == 0 || (ids.length == 1 && StringUtils.isEmpty(ids[0]))) {
             String[] parentIds = {null, ""};
             ids = this.baseRepository.findAllIdsByParentId(parentIds);
         }

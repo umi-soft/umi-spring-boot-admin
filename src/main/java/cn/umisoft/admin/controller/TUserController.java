@@ -103,8 +103,10 @@ public class TUserController extends UmiTController<ITUserService, TUser> {
         result.put("fileName", null);
         result.put("avatarNetAccessPrefixPath", null);
         if (!file.isEmpty()) {
-            String fileName = file.getOriginalFilename();  // 文件名
-            fileName = UUID.randomUUID() + fileName.substring(fileName.lastIndexOf(".")); // 新文件名
+            // 文件名
+            String fileName = file.getOriginalFilename();
+            // 新文件名
+            fileName = UUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));
             File dest = new File(UmiFile.addSeparator(avatarDiskPrefixPath) + fileName);
             if (!dest.getParentFile().exists()) {
                 dest.getParentFile().mkdirs();

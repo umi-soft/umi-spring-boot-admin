@@ -60,7 +60,7 @@ public class AuthController {
      */
     @GetMapping(value = "captcha")
     public ApiResult captcha(HttpServletRequest request, String key) {
-        if (key == null || key.replaceAll(" ","").equals("")) {
+        if (key == null || "".equals(key.trim())) {
             key = request.getSession(true).getId();
         }
         String text = producer.createText();
@@ -80,7 +80,7 @@ public class AuthController {
         Assert.notNull(captcha, "验证码不能为空");
         Assert.notNull(loginName, "用户名不能为空");
         Assert.notNull(password, "密码不能为空");
-        if (key == null || key.replaceAll(" ","").equals("")) {
+        if (key == null || "".equals(key.trim())) {
             key = request.getSession(true).getId();
         }
         String redisCaptcha = redisTemplate.opsForValue().get(key);

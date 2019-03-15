@@ -21,6 +21,7 @@ public interface IUmiService<T> extends IService<T> {
      * @param: id
      * @return: boolean
      */
+    @Override
     public boolean removeById(Serializable id);
     /**
      * @description: <p>删除，该方法将会通过反射手段将entity属性名称转换为数据库属性名称</p>
@@ -30,6 +31,7 @@ public interface IUmiService<T> extends IService<T> {
      * @param: map，key值为entity的属性名称，value
      * @return: boolean
      */
+    @Override
     public boolean removeByMap(Map<String, Object> map);
     /**
      * @description: <p>重新构建映射关系，清除原有映射关系，只保留本次新增的映射关系,默认批量操作大小设置为1000</p>

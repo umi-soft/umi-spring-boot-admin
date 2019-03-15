@@ -83,35 +83,9 @@ public class UmiServiceImpl<M extends UmiMapper<T>,R extends JpaRepository<T, St
             }
         }
         // 以下代码借鉴了父类 ServiceImpl asveBatch方法
-        String sqlStatement = this.sqlStatement(SqlMethod.INSERT_ONE);
-        SqlSession batchSqlSession = this.sqlSessionBatch();
-        Throwable e1 = null;
-        try {
-            int i = 0;
-            for(T entity : entities) {
-                i ++;
-                batchSqlSession.insert(sqlStatement, entity);
-                if (i >= 1 && i % batchSize == 0) {
-                    batchSqlSession.flushStatements();
-                }
-            }
-            batchSqlSession.flushStatements();
-            return true;
-        } catch (Throwable e2) {
-            e1 = e2;
-            throw e2;
-        } finally {
-            if (batchSqlSession != null) {
-                if (e1 != null) {
-                    try {
-                        batchSqlSession.close();
-                    } catch (Throwable e3) {
-                        e1.addSuppressed(e3);
-                    }
-                } else {
-                    batchSqlSession.close();
-                }
-            }
+        for(T entity : entities) {
+            this.baseMapper.insert(entity);
         }
+        return true;
     }
 }

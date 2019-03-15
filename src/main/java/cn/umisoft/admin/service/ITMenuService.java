@@ -1,7 +1,6 @@
 package cn.umisoft.admin.service;
 
 import cn.umisoft.admin.entity.TMenu;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -31,7 +30,7 @@ public interface ITMenuService extends IUmiService<TMenu> {
      * @param:
      * @return:
      */
-    Map<String, Map<String, String>> syncMenus(List<TMenu> menus);
+    Map<String, List<Map<String, String>>> syncMenus(List<TMenu> menus);
     /**
      * @description: <p>查询系统中所有的路由与角色映射关系</p>
      *               <p>map key为路由ID，value为映射的角色ID set集合</p>

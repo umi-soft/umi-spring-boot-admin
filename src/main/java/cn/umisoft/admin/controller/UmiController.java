@@ -84,7 +84,9 @@ public class UmiController<S extends IUmiService<T>, T> implements IEntityHelper
      */
     protected QueryWrapper<T> queryWrapperBuilder( List<UmiQueryCondition> conditions) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<T>();
-        if (conditions == null) return queryWrapper;
+        if (conditions == null) {
+            return queryWrapper;
+        }
         for(UmiQueryCondition condition : conditions) {
             umiQueryConditionBuilder(queryWrapper, condition);
         }

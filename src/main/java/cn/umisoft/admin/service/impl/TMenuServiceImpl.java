@@ -36,32 +36,39 @@ public class TMenuServiceImpl extends UmiServiceImpl<TMenuMapper, TMenuRepositor
             rollbackFor = {Exception.class}
     )
     @Override
-    public Map<String, Map<String, String>> syncMenus(List<TMenu> menus) {
+    public Map<String, List<Map<String, String>>> syncMenus(List<TMenu> menus) {
 
-        Map<String, Map<String, String>> result = new HashMap<String, Map<String, String>>();
-        result.put("insert", new HashMap<String, String>());
-        result.put("update", new HashMap<String, String>());
-        result.put("delete", new HashMap<String, String>());
+        Map<String, List<Map<String, String>>> result = new HashMap<String, List<Map<String, String>>>();
+        result.put("insert", new ArrayList<Map<String, String>>());
+        result.put("update", new ArrayList<Map<String, String>>());
+        result.put("delete", new ArrayList<Map<String, String>>());
 
         Map<String, String> ids = this.baseMapper.selectAllIdMap();
-
         for (TMenu menu : menus) {
-            if (ids.get(menu.getId()) == null) { // 全新的路由
+            Map<String, String> temp = new HashMap<String, String>();
+            if (ids.get(menu.getId()) == null) {
+                // 全新的路由
                 this.baseMapper.insert(menu);
-                result.get("insert").put(menu.getId(), menu.getName());
-            } else { // 已存在的
+                temp.put(menu.getId(), menu.getName());
+                result.get("insert").add(temp);
+            } else {
+                // 已存在的
                 this.baseMapper.updateById(menu);
-                result.get("update").put(menu.getId(), menu.getName());
-                ids.remove(menu.getId()); // 操作完成，移除，最终剩下的则为前端路由移除的
+                temp.put(menu.getId(), menu.getName());
+                result.get("update").add(temp);
+                // 操作完成，移除，最终剩下的则为前端路由移除的
+                ids.remove(menu.getId());
             }
         }
         // 剩下的部分为前端路由移除了，后端没有移除的藏数据，逻辑删除即可
         for (String id : ids.keySet()) {
+            Map<String, String> temp = new HashMap<String, String>();
             try {
                 TMenu menu = getEntityClass().newInstance();
                 menu.setId((String)id);
                 this.baseMapper.deleteByIdWithFill(menu);
-                result.get("delete").put(id, ids.get(id));
+                temp.put(id, ids.get(id));
+                result.get("delete").add(temp);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {

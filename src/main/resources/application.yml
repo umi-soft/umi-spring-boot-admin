@@ -1,15 +1,15 @@
 umisoft:
   jwt:
-    secret: umisoft.cn
+    secret:
     minutes: 30
   avatar-disk-prefix-path: /Users/hujie/Downloads
 spring:
   datasource:
     # https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
     druid:
-      url: jdbc:mysql://192.144.128.53:3306/umi-soft-admin?useUnicode=true&useSSL=false&characterEncoding=utf8
-      username: root
-      password: umisoft.cn
+      url:
+      username:
+      password:
       driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
@@ -19,9 +19,9 @@ spring:
     show-sql: true
   redis:
     database: 0
-    host: 192.144.128.53
-    port: 6379
-    password: umisoft.cn
+    host:
+    port:
+    password:
 mybatis-plus:
   configuration:
     # 开启查询结果【下划线转驼峰】
