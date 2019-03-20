@@ -43,7 +43,11 @@ public class TMenuServiceImpl extends UmiServiceImpl<TMenuMapper, TMenuRepositor
         result.put("update", new ArrayList<Map<String, String>>());
         result.put("delete", new ArrayList<Map<String, String>>());
 
-        Map<String, String> ids = this.baseMapper.selectAllIdMap();
+        List<TMenu> history = this.baseMapper.selectList(new QueryWrapper<TMenu>());
+        Map<String, String> ids = new HashMap<String, String>();
+        for (TMenu menu : history) {
+            ids.put(menu.getId(), menu.getName());
+        }
         for (TMenu menu : menus) {
             Map<String, String> temp = new HashMap<String, String>();
             if (ids.get(menu.getId()) == null) {

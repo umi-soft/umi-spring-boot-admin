@@ -66,7 +66,7 @@ public class UmiTController<S extends IUmiService<T>, T extends UmiEntity> exten
         entity.setCreatedBy(null);
         entity.setCreatedDate(null);
         baseService.updateById(entity);
-        return ApiResultWrapper.success();
+        return ApiResultWrapper.success(entity);
     }
     /**
      * @description: <p>根据id查询</p>
