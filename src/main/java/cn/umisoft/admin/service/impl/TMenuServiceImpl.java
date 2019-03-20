@@ -2,6 +2,7 @@ package cn.umisoft.admin.service.impl;
 
 import cn.umisoft.admin.entity.RMenuRole;
 import cn.umisoft.admin.entity.TMenu;
+import cn.umisoft.admin.exception.DaoHandlerGlobalException;
 import cn.umisoft.admin.mapper.TMenuMapper;
 import cn.umisoft.admin.repository.RMenuRoleRepository;
 import cn.umisoft.admin.repository.TMenuRepository;
@@ -75,8 +76,10 @@ public class TMenuServiceImpl extends UmiServiceImpl<TMenuMapper, TMenuRepositor
                 result.get("delete").add(temp);
             } catch (InstantiationException e) {
                 e.printStackTrace();
+                throw new DaoHandlerGlobalException("删除历史路由记录时发生错误");
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
+                throw new DaoHandlerGlobalException("删除历史路由记录时发生错误");
             }
         }
         return result;
