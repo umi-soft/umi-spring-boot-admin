@@ -1,8 +1,38 @@
 umisoft:
   jwt:
-    secret:
+    secret: umisoft.cn
     minutes: 30
   avatar-disk-prefix-path: /Users/hujie/Downloads
+  mybatis-plus:
+    generator:
+      global:
+        author: hujie@umisoft.cn
+        file-override: false
+        base-result-map: false
+      package:
+        module-name: admin
+        parent: cn.umisoft
+      strategy:
+        naming: underline_to_camel
+        column-naming: underline_to_camel
+        logic-delete-field-name: DELETED
+        rest-controller-style: true
+        controller-mapping-hyphen-style: true
+        entity-lombok-model: true
+        super-entity-columns:
+          - id
+          - deleted
+          - createdBy
+          - createdDate
+          - modifiedBy
+          - modifiedDate
+        super-entity-class: cn.umisoft.admin.entity.UmiREntity
+        super-service-class: cn.umisoft.admin.service.UmiService
+        super-service-impl-class: cn.umisoft.admin.service.impl.UmiServiceImpl
+        super-controller-class: cn.umisoft.admin.controller.UmiTController
+        table-prefix:
+          - T_
+          - R_
 spring:
   datasource:
     # https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter

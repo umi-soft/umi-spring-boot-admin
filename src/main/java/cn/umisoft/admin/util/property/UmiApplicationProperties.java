@@ -19,4 +19,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class UmiApplicationProperties {
     private String avatarDiskPrefixPath;
     private JwtToken jwt;
+
+    private UmiMPCodeGeneratorConfig mybatisPlusGeneratorConfig;
 }
